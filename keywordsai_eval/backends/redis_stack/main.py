@@ -10,12 +10,13 @@ class RedisEvaluationBackend(BaseEvaluationBackend):
         QUERY_TYPE = "query_type_categories"
         TOPIC = "topic_categories"
         
-    def __init__(self, redis_client: redis.Redis | None = None):
+    def __init__(self, redis_client: redis.Redis | None = None, skip_init: bool = False):
         if not redis_client:
             self.redis_client = redis.Redis(**settings.REDIS_CLIENT)
         else:
             self.redis_client = redis_client
-        init_embeddings(self.redis_client)
+        if not skip_init:
+            init_embeddings(self.redis_client)
 
     def predict(self, query: str, type: str=ClassificationType.QUERY_TYPE) -> str:
         if type not in self.ClassificationType.choices():
