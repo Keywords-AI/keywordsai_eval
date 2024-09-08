@@ -183,9 +183,9 @@ def init_embeddings(client: redis.Redis):
     """
     current_embedding_model = client.get(name=settings.EMBEDDING_MODEL_NAME_KEY)
     if current_embedding_model != settings.EMBEDDING_MODEL_NAME:
-        # print_warning(
-        #     f"The current embeddings are created with {current_embedding_model} instead of specified: {settings.EMBEDDING_MODEL_NAME}. Consider running keywordsai_eval.backends.redis_stack.reset_embeddings() to reset the embeddings. or change the value of EMBEDDING_MODEL_NAME in the environment variables."
-        # )
+        print(
+            f"The current embeddings are created with {current_embedding_model} instead of specified: {settings.EMBEDDING_MODEL_NAME}. Consider running keywordsai_eval.backends.redis_stack.reset_embeddings() to reset the embeddings. or change the value of EMBEDDING_MODEL_NAME in the environment variables."
+        )
     create_classification_embeddings(
         client, index_name=settings.QUERY_TYPE_EMBEDDING_INDEX_NAME
     )
