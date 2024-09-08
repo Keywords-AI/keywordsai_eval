@@ -1,0 +1,12 @@
+{
+    "Writing": "Engaging in narrative and creative text generation.",
+    "Questions": "Responding to inquiries across various topics.",
+    "Math": "Performing calculations and interpreting data.",
+    "Roleplay": "Engaging in simulated dialogues and scenarios.",
+    "Analysis": "Performing sentiment analysis, summarization, and entity recognition.",
+    "Creativity": "Generating ideas and concepts in arts and design.",
+    "Coding": "This task requires coding assistants and code generation.",
+    "Education": "Developing learning materials and providing explanations.",
+    "Research": "Conducting online research and compiling information.",
+    "Translation": "Translating text across multiple languages."
+}
