@@ -8,3 +8,7 @@ Installation
 pip install keywordsai-eval
 ```
 
+requirements-to-poetry
+```
+xargs poetry add < requirements.txt
+```
