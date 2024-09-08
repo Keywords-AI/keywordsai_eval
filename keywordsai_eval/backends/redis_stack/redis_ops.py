@@ -14,6 +14,7 @@ from pathlib import Path
 import json
 from ... import settings
 from litellm import embedding as litellm_embedding
+from keywordsai.utils.debug_print import print_warning, print_info, debug_print
 
 RELATIVE_PATH = Path(__file__).parent
 oai_client = OpenAI()
@@ -30,10 +31,16 @@ except Exception as e:
     print("Error importing category prompts", e)
 
 
-def create_and_store_embedding(client: redis.Redis, key_name, details, summary=""):
+def create_and_store_embedding(
+    client: redis.Redis,
+    key_name,
+    details,
+    summary="",
+    model=settings.EMBEDDING_MODEL_NAME,
+):
 
     # convert to numpy array and bytes
-    vector = create_embedding_vector(details)
+    vector = create_embedding_vector(details, model=model)
     # Create a new hash with url and embedding
     post_hash = {
         "summary": summary,
@@ -57,12 +64,13 @@ def create_embedding_vector(
     text -- text to be embedded, string
     Return: np.array in bytes
     """
+
     splitter = TokenTextSplitter.from_tiktoken_encoder(
         chunk_size=7000, chunk_overlap=0, encoding_name="cl100k_base"
     )  # safe trim to 8000 tokens, prevent overloading embedding model. text-emebdding-3-small is cl100k_base
     text = splitter.split_text(text)[0]
     token_count = token_counter(text=text)
-    print(f"=====Vectorizing: {text[:15]} Token count: {token_count}=====")
+    print_info(f"=====Vectorizing: {text[:15]}... Token count: {token_count}=====", print_func=debug_print)
     embedding = litellm_embedding(input=text, model=model, dimensions=dimensions)
     query_vector = embedding.data[0].get("embedding", [])
     # Convert the vector to a numpy array
@@ -120,7 +128,9 @@ def clear_previous_embeddings(index_name):
         client.delete(key)
 
 
-def create_classification_index(client: redis.Redis, index_name: str, prefixes: list[str]):
+def create_classification_index(
+    client: redis.Redis, index_name: str, prefixes: list[str]
+):
     SCHEMA = [
         TextField("summary"),
         TextField("details"),
@@ -143,7 +153,9 @@ def create_classification_index(client: redis.Redis, index_name: str, prefixes: 
 
 
 def create_classification_embeddings(
-    client: redis.Redis, index_name: str = "query_type_categories", model=settings.EMBEDDING_MODEL_NAME
+    client: redis.Redis,
+    index_name: str = settings.QUERY_TYPE_EMBEDDING_INDEX_NAME,
+    model=settings.EMBEDDING_MODEL_NAME,
 ):
     """
     Create an index of documentations for categories that contains the following information:
@@ -162,15 +174,20 @@ def create_classification_embeddings(
             create_and_store_embedding(client, label, prompt, category)
 
     # Create or update the OpenAI index with new categories
-    create_classification_index(client, index_name, ["query_type_categories"])
+    create_classification_index(client, index_name, [index_name])
 
 
 def init_embeddings(client: redis.Redis):
     """
     Create the embeddings for the categories, formats, and expertise domains
     """
+    current_embedding_model = client.get(name=settings.EMBEDDING_MODEL_NAME_KEY)
+    if current_embedding_model != settings.EMBEDDING_MODEL_NAME:
+        print_warning(
+            f"The current embeddings are created with {current_embedding_model} instead of specified: {settings.EMBEDDING_MODEL_NAME}. Consider running keywordsai_eval.backends.redis_stack.reset_embeddings() to reset the embeddings. or change the value of EMBEDDING_MODEL_NAME in the environment variables."
+        )
     create_classification_embeddings(
-        client, index_name=settings.CATEGORY_EMBEDDING_INDEX_NAME
+        client, index_name=settings.QUERY_TYPE_EMBEDDING_INDEX_NAME
     )
     create_classification_embeddings(
         client, index_name=settings.TOPIC_EMBEDDING_INDEX_NAME
@@ -178,7 +195,7 @@ def init_embeddings(client: redis.Redis):
 
 
 def get_category(
-    query_string, index_name: str = settings.CATEGORY_EMBEDDING_INDEX_NAME, client=None
+    query_string, index_name: str = settings.QUERY_TYPE_EMBEDDING_INDEX_NAME, client=None
 ) -> str:
     """Get the category and difficulty of a question based on its embedding
 
@@ -188,6 +205,7 @@ def get_category(
     Return: string of category and difficulty: "difficulty:category"
     """
     if not client:
+
         client = redis.Redis(**settings.REDIS_CLIENT)
     query_vector = create_embedding_vector(query_string)
     base_query = "*=>[KNN 20 @embedding $vector AS vector_score]"
@@ -226,8 +244,11 @@ def delete_index(index_name, client=None):
         print("Error", e)
 
 
-def reset_embeddings(client, test=False):
+def reset_embeddings(client=None, test=False):
+    if not client:
+        client = redis.Redis(**settings.REDIS_CLIENT)
+    client.set(settings.EMBEDDING_MODEL_NAME_KEY, settings.EMBEDDING_MODEL_NAME)
     if not test:
-        delete_index("query_type_categories")
-        delete_index("topic_categories")
+        delete_index(index_name=settings.QUERY_TYPE_EMBEDDING_INDEX_NAME, client=client)
+        delete_index(index_name=settings.TOPIC_EMBEDDING_INDEX_NAME,client= client)
     init_embeddings(client)

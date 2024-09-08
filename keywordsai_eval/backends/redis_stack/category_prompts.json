@@ -1,12 +1,12 @@
 {
-    "Writing": "Engaging in narrative and creative text generation.",
-    "Questions": "Responding to inquiries across various topics.",
-    "Math": "Performing calculations and interpreting data.",
-    "Roleplay": "Engaging in simulated dialogues and scenarios.",
-    "Analysis": "Performing sentiment analysis, summarization, and entity recognition.",
-    "Creativity": "Generating ideas and concepts in arts and design.",
-    "Coding": "This task requires coding assistants and code generation.",
-    "Education": "Developing learning materials and providing explanations.",
-    "Research": "Conducting online research and compiling information.",
-    "Translation": "Translating text across multiple languages."
+    "Writing": "Generate a creative or narrative text, such as a story, poem, or descriptive passage. For example, write a short story about a dragon who learns to fly.",
+    "Questions": "Provide a detailed and informative response to a specific question or inquiry on a given topic. For instance, explain the main causes of climate change.",
+    "Math": "Perform mathematical calculations or analyze numerical data to solve a problem or interpret results. For example, calculate the derivative of the function f(x) = 3x^2 + 2x + 1.",
+    "Roleplay": "Engage in a simulated conversation or scenario, taking on specific roles or characters. For instance, act as a customer service representative helping a customer with a billing issue.",
+    "Analysis": "Conduct an analysis of text to determine sentiment, summarize content, or identify key entities and themes. For example, summarize the main points of an article on renewable energy.",
+    "Creativity": "Generate innovative ideas or concepts related to arts, design, or creative projects. For instance, brainstorm creative ideas for a new mobile app.",
+    "Coding": "Write or debug code, or provide explanations related to programming and software development. For example, create a Python function to reverse a string.",
+    "Education": "Create educational content or provide clear explanations to facilitate learning and understanding. For instance, explain the process of photosynthesis in plants.",
+    "Research": "Gather and compile information from various sources to provide a comprehensive overview of a topic. For example, explore the latest advancements in artificial intelligence research.",
+    "Translation": "Translate text accurately from one language to another, maintaining the original meaning and context. For instance, translate the English text 'Hello, how are you?' into Spanish."
 }
