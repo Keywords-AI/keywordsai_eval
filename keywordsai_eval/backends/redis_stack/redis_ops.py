@@ -14,7 +14,7 @@ from pathlib import Path
 import json
 from ... import settings
 from litellm import embedding as litellm_embedding
-from keywordsai_sdk.utils.debug_print import print_warning, print_info, debug_print
+# from keywordsai_sdk.utils.debug_print import print_warning, print_info, debug_print
 
 RELATIVE_PATH = Path(__file__).parent
 oai_client = OpenAI()
@@ -70,7 +70,7 @@ def create_embedding_vector(
     )  # safe trim to 8000 tokens, prevent overloading embedding model. text-emebdding-3-small is cl100k_base
     text = splitter.split_text(text)[0]
     token_count = token_counter(text=text)
-    print_info(f"=====Vectorizing: {text[:15]}... Token count: {token_count}=====", print_func=debug_print)
+    # print_info(f"=====Vectorizing: {text[:15]}... Token count: {token_count}=====", print_func=debug_print)
     embedding = litellm_embedding(input=text, model=model, dimensions=dimensions)
     query_vector = embedding.data[0].get("embedding", [])
     # Convert the vector to a numpy array
@@ -183,9 +183,9 @@ def init_embeddings(client: redis.Redis):
     """
     current_embedding_model = client.get(name=settings.EMBEDDING_MODEL_NAME_KEY)
     if current_embedding_model != settings.EMBEDDING_MODEL_NAME:
-        print_warning(
-            f"The current embeddings are created with {current_embedding_model} instead of specified: {settings.EMBEDDING_MODEL_NAME}. Consider running keywordsai_eval.backends.redis_stack.reset_embeddings() to reset the embeddings. or change the value of EMBEDDING_MODEL_NAME in the environment variables."
-        )
+        # print_warning(
+        #     f"The current embeddings are created with {current_embedding_model} instead of specified: {settings.EMBEDDING_MODEL_NAME}. Consider running keywordsai_eval.backends.redis_stack.reset_embeddings() to reset the embeddings. or change the value of EMBEDDING_MODEL_NAME in the environment variables."
+        # )
     create_classification_embeddings(
         client, index_name=settings.QUERY_TYPE_EMBEDDING_INDEX_NAME
     )

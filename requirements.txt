@@ -24,6 +24,8 @@ jsonpatch==1.33
 jsonpointer==3.0.0
 jsonschema==4.23.0
 jsonschema-specifications==2023.12.1
+keywordsai-eval @ file:///Users/huangyunrui/platform/keywordsai_eval
+keywordsai-sdk==0.1.8
 langchain==0.2.16
 langchain-core==0.2.38
 langchain-text-splitters==0.2.4
@@ -31,6 +33,7 @@ langsmith==0.1.116
 litellm==1.44.22
 MarkupSafe==2.1.5
 multidict==6.0.5
+munch==4.0.0
 numpy==1.26.4
 openai==1.44.0
 orjson==3.10.7
