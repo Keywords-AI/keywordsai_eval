@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "keywordsai-eval"
-version = "0.1.0"
+version = "0.1.2"
 description = "An evaluation package for LLM input output"
 authors = ["Keywords AI Team <team@keywordsai.co>"]
 license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = ">3.8"
 redis = "5.0.8"
 numpy = "1.26.4"
 aiohappyeyeballs = "2.4.0"
