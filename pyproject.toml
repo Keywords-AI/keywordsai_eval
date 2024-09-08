@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "keywordsai-eval"
-version = "0.1.6"
+version = "0.1.8"
 description = "An evaluation package for LLM input output"
 authors = ["Keywords AI Team <team@keywordsai.co>"]
 license = "MIT"

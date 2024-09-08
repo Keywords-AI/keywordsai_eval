@@ -1,12 +1,11 @@
 {
-    "Writing": "Generate a creative or narrative text, such as a story, poem, or descriptive passage. For example, write a short story about a dragon who learns to fly.",
-    "Questions": "Provide a detailed and informative response to a specific question or inquiry on a given topic. For instance, explain the main causes of climate change.",
-    "Math": "Perform mathematical calculations or analyze numerical data to solve a problem or interpret results. For example, calculate the derivative of the function f(x) = 3x^2 + 2x + 1.",
-    "Roleplay": "Engage in a simulated conversation or scenario, taking on specific roles or characters. For instance, act as a customer service representative helping a customer with a billing issue.",
-    "Analysis": "Conduct an analysis of text to determine sentiment, summarize content, or identify key entities and themes. For example, summarize the main points of an article on renewable energy.",
-    "Creativity": "Generate innovative ideas or concepts related to arts, design, or creative projects. For instance, brainstorm creative ideas for a new mobile app.",
-    "Coding": "Write or debug code, or provide explanations related to programming and software development. For example, create a Python function to reverse a string.",
-    "Education": "Create educational content or provide clear explanations to facilitate learning and understanding. For instance, explain the process of photosynthesis in plants.",
-    "Research": "Gather and compile information from various sources to provide a comprehensive overview of a topic. For example, explore the latest advancements in artificial intelligence research.",
-    "Translation": "Translate text accurately from one language to another, maintaining the original meaning and context. For instance, translate the English text 'Hello, how are you?' into Spanish."
+  "Buy Products": "Queries about purchasing products, availability, pricing, buying process, shipping, delivery, and payment methods.",
+  "Other Intent": "Queries that don't fit other categories, contain multiple intents, are vague or ambiguous, or include general feedback unrelated to specific issues.",
+  "Concept Explanation": "Requests for explanations of concepts, features, or terminology related to products or services. Includes definition requests, feature clarifications, and comparisons between concepts.",
+  "How-To Instructions": "Requests for step-by-step guidance on using products or features, including setup, configuration, and best practices.",
+  "Report Errors or Bugs": "Users reporting issues, errors, or unexpected behavior in products or services, including specific error messages or malfunctions.",
+  "Update Personal Information": "Requests to modify user account details, personal information, billing data, communication preferences, or account security settings.",
+  "Code Generation": "Requests for code samples, snippets, function writing, or implementation examples related to your product or API.",
+  "Debugging & Error Analysis": "Requests for help identifying and resolving coding or integration issues, including error interpretation and code optimization.",
+  "Troubleshooting & Technical Support": "General technical issues and support requests not specific to coding, such as connectivity problems, product configuration, and performance issues."
 }
