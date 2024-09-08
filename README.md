@@ -8,11 +8,6 @@ Installation
 pip install keywordsai-eval
 ```
 
-requirements-to-poetry
-```
-xargs poetry add < requirements.txt
-```
-
 # Sample questions
 What are the main features of Keywords AI, and how do they benefit developers?
 
