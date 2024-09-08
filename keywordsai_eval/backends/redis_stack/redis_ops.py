@@ -14,7 +14,7 @@ from pathlib import Path
 import json
 from ... import settings
 from litellm import embedding as litellm_embedding
-from keywordsai.utils.debug_print import print_warning, print_info, debug_print
+from keywordsai_sdk.utils.debug_print import print_warning, print_info, debug_print
 
 RELATIVE_PATH = Path(__file__).parent
 oai_client = OpenAI()
