@@ -10,6 +10,7 @@ pip install keywordsai-eval
 
 
 ## Available backends
+- keywordsai_eval.backends.redis_stack import RedisEvaluationBackend
 
 ### Redis-Stack
 ```
