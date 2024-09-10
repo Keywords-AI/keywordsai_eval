@@ -23,7 +23,7 @@ Setup:
 ```
 redis-stack-server
 ```
-Keep it live in the background.
+Keep it live in the background.  
 3. Set up the environment variables for this backend:
 ```
 REDIS_HOST=HOST
